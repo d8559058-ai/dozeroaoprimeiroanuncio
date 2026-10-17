@@ -55,7 +55,7 @@ function Admin() {
 
   const save = async () => {
     const cents = Math.round(Number(form.price.replace(",", ".")) * 100);
-    if (!form.title.trim() || !Number.isFinite(cents) || cents < 100) { toast.error("Informe título e preço válido (mínimo R$ 1,00)."); return; } return; }
+    if (!form.title.trim() || !Number.isFinite(cents) || cents < 100) { toast.error("Informe título e preço válido (mínimo R$ 1,00)."); return; }
     setBusy(true);
     const { error } = await supabase.from("products").update({ title: form.title.trim(), description: form.description, price_cents: cents, updated_at: new Date().toISOString() }).eq("id", "guia");
     setBusy(false);
