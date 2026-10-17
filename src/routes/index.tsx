@@ -42,7 +42,7 @@ const problems = [
   "Seus perfis e canais de contato ainda não estão prontos para receber clientes.",
 ];
 
-const faqs = [
+const faqs: [string, string][] = [
   ["Que tipo de material é?", "É um guia digital em PDF. Não inclui videoaulas, comunidade ou acompanhamento individual."],
   ["Como recebo o guia?", "Assim que o Mercado Pago confirmar o pagamento, você é levado à página de entrega com o botão para baixar o PDF. Guarde o link dessa página para voltar quando quiser."],
   ["Quais formas de pagamento?", "As disponíveis no checkout do Mercado Pago, como Pix e cartão. Você escolhe na hora do pagamento."],

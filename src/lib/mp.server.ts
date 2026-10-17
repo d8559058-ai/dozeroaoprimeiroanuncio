@@ -97,7 +97,7 @@ export async function verifyMpSignature(request: Request, dataId: string) {
   }
   const sig = request.headers.get("x-signature") ?? "";
   const reqId = request.headers.get("x-request-id") ?? "";
-  const parts = Object.fromEntries(sig.split(",").map((p) => p.trim().split("=") as [string, string]));
+  const parts: { ts?: string; v1?: string } = Object.fromEntries(sig.split(",").map((p) => p.trim().split("=") as [string, string]));
   if (!parts.ts || !parts.v1) return false;
   const manifest = `id:${dataId.toLowerCase()};request-id:${reqId};ts:${parts.ts};`;
   const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
