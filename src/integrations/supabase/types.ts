@@ -14,16 +14,128 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          access_token: string
+          amount_cents: number
+          approved_at: string | null
+          created_at: string
+          download_count: number
+          id: string
+          mp_payment_id: string | null
+          mp_preference_id: string | null
+          mp_status_detail: string | null
+          payer_email: string | null
+          product_id: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          access_token?: string
+          amount_cents: number
+          approved_at?: string | null
+          created_at?: string
+          download_count?: number
+          id?: string
+          mp_payment_id?: string | null
+          mp_preference_id?: string | null
+          mp_status_detail?: string | null
+          payer_email?: string | null
+          product_id: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          access_token?: string
+          amount_cents?: number
+          approved_at?: string | null
+          created_at?: string
+          download_count?: number
+          id?: string
+          mp_payment_id?: string | null
+          mp_preference_id?: string | null
+          mp_status_detail?: string | null
+          payer_email?: string | null
+          product_id?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "orders_product_id_fkey"
+            columns: ["product_id"]
+            isOneToOne: false
+            referencedRelation: "products"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      products: {
+        Row: {
+          description: string
+          file_path: string | null
+          file_updated_at: string | null
+          id: string
+          image_path: string | null
+          price_cents: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          description?: string
+          file_path?: string | null
+          file_updated_at?: string | null
+          id: string
+          image_path?: string | null
+          price_cents: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          description?: string
+          file_path?: string | null
+          file_updated_at?: string | null
+          id?: string
+          image_path?: string | null
+          price_cents?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +262,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
